@@ -64,7 +64,7 @@ You can configure the script using environment variables. The most important one
 • **ANSWER_METHOD:** Method for generating the final answer ("stuff", "map_reduce", or "refine")
 
 Example configuration (Unix/macOS):
-
+```
    export DOCUMENTS_PATH="documents"
    export INDEX_PATH="index/faiss_index.index"
    export CHUNKS_PATH="index/chunks.json"
@@ -78,7 +78,7 @@ Example configuration (Unix/macOS):
    export OPENAI_API_KEY="your_openai_api_key_here"
    export OPENAI_MODEL="gpt-3.5-turbo"
    export ANSWER_METHOD="stuff"
-
+```
 ---
 
 ## Usage
