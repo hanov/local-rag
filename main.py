@@ -168,25 +168,25 @@ def generate_map_reduce_answer(main_question: str, knowledge_context: List[str])
     partial_summaries = []
     for idx, chunk_text_val in enumerate(knowledge_context, start=1):
         map_prompt = f"""
-Суммируй этот отрывок на русском языке (Cyrillic) кратко:
-Отрывок #{idx}:
+Summarize the following excerpt briefly:
+Excerpt #{idx}:
 \"\"\"{chunk_text_val}\"\"\"
 
-Краткое изложение:
+Brief summary:
 """
         summary = ask_model(map_prompt)
         partial_summaries.append(summary)
 
     combined_summaries = "\n\n".join(partial_summaries)
     reduce_prompt = f"""
-Мы имеем краткие конспекты (Cyrillic) различных отрывков:
+We have brief summaries for several excerpts:
 
 {combined_summaries}
 
-Теперь, основываясь на этих конспектах, ответь на вопрос:
+Now, based on these summaries, answer the following question:
 \"\"\"{main_question}\"\"\"
 
-Детальный и точный ответ (по-русски):
+Please provide a detailed and precise answer:
 """
     final_answer = ask_model(reduce_prompt)
     return final_answer
@@ -194,21 +194,21 @@ def generate_map_reduce_answer(main_question: str, knowledge_context: List[str])
 def generate_refine_answer(main_question: str, knowledge_context: List[str]) -> str:
     draft_answer = generate_stuff_answer(main_question, knowledge_context)
     refine_prompt = f"""
-Вот предварительный ответ:
+Here is the preliminary answer:
 \"\"\"{draft_answer}\"\"\"
 
-Вот весь контекст (Cyrillic):
+Here is the entire context:
 {json.dumps(knowledge_context, ensure_ascii=False, indent=2)}
 
-Проверь, нужно ли что-то уточнить или добавить, чтобы ответ стал полнее?
-Если да, дополни ответ. Если нет, скажи "Ответ уже полон."
+Review the answer and let us know if anything needs to be clarified or added to make it more complete.
+If no changes are needed, please respond with "The answer is already complete."
 """
     refine_response = ask_model(refine_prompt)
 
-    if "Ответ уже полон" in refine_response:
+    if "The answer is already complete" in refine_response:
         return draft_answer
     else:
-        return f"{draft_answer}\n\nДополнение:\n{refine_response}"
+        return f"{draft_answer}\n\nAddition:\n{refine_response}"
 
 # --------------------------------------------------
 # DIRECT RAG QUERY (BYPASSING RESEARCH STATE)
@@ -258,7 +258,7 @@ def main():
     print("\n====================================================")
     print("DIRECT RAG QUERY - READY FOR QUERY")
     print(f"Answer method: {ANSWER_METHOD.upper()}")
-    print("Enter your question (Cyrillic or otherwise). Press Enter.")
+    print("Enter your question. Press Enter.")
     print("====================================================\n")
     user_question = sys.stdin.readline().strip()
     if not user_question:
