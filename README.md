@@ -85,7 +85,7 @@ Example configuration (Unix/macOS):
 
 1. Place your `.txt` documents in the folder specified by DOCUMENTS_PATH.
 2. Run the script:
-   > python script.py
+   > python main.py
 
 3. Follow the on-screen instructions. You will be prompted to enter your question—the script will then retrieve the most relevant context and generate an answer.
 
@@ -103,17 +103,17 @@ This command builds the image and tags it as "my-python-app". You can choose a d
 
 After building the image, you can run the container with:
 
-  `docker run --rm -it my-python-app`
+  `docker run  --network host --rm -it my-python-app`
 
 If your application needs to receive environment variables, you can specify them at runtime using the `-e` flag. For example:
 
-  `docker run --rm -it -e DOCUMENTS_PATH=documents -e INDEX_PATH=index/faiss_index.index my-python-app`
+  `docker run  --network host --rm -it -e DOCUMENTS_PATH=documents -e INDEX_PATH=index/faiss_index.index my-python-app`
 
 ### Mounting Volumes
 
 If your application accesses external data, you may mount directories to the container. For instance, if you need to mount a local directory into the container’s `/app/data` folder, run:
 
-  `docker run --rm -it -v /local/path/to/data:/app/data my-python-app`
+  `docker run  --network host --rm -it -v /local/path/to/data:/app/data my-python-app`
 
 ---
 
