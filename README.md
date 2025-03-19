@@ -86,6 +86,12 @@ Example configuration (Unix/macOS):
 1. Place your `.txt` documents in the folder specified by DOCUMENTS_PATH.
 2. Run the script:
    > python main.py
+   
+   OR
+   > ANSWER_METHOD=refine python main.py
+
+   OR
+   > ANSWER_METHOD=map_reduce python main.py
 
 3. Follow the on-screen instructions. You will be prompted to enter your question—the script will then retrieve the most relevant context and generate an answer.
 
