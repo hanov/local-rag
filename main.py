@@ -151,13 +151,13 @@ def ask_model(prompt: str) -> str:
 def generate_stuff_answer(main_question: str, knowledge_context: List[str]) -> str:
     combined_context = "\n\n".join(knowledge_context)
     prompt = f"""
-You are an AI assistant. The user asked (in Cyrillic or any language):
+You are an AI assistant. The user asked:
 \"\"\"{main_question}\"\"\"
 
 Below is all relevant context (in chunks):
 {combined_context}
 
-Using ONLY the above context, provide a concise final answer in Cyrillic.
+Using ONLY the above context, provide a concise final answer.
 If you are unsure, say "I am not sure."
 
 Final answer:
